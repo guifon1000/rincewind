@@ -1,11 +1,10 @@
 import sys
-sys.path.append('../')
-from geo_functions import dot
 import json
 import numpy as np
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Triangle import Triangle
+from .Point import Point
+from .Vector import Vector
+from .Triangle import Triangle
+from ..geo_functions import dot
 from scipy.spatial.kdtree import *
 
 class Triangulation(dict):

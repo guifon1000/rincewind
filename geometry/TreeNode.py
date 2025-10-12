@@ -1,9 +1,9 @@
 import numpy as np
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Line import Line
-from geometry.Polyline2D import Polyline2D
-from geo_functions import angle, cross, intersect_2_lines
+from .Point import Point
+from .Vector import Vector
+from .Line import Line
+from .Polyline2D import Polyline2D
+from ..geo_functions import angle, cross, intersect_2_lines
 
 class TreeNode(list): 
     def __init__(self, *largs,**kwargs):

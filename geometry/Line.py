@@ -1,8 +1,7 @@
-from geometry.Point import Point
-from geometry.Vector import Vector
+from .Point import Point
+from .Vector import Vector
 import sys
-sys.path.append('../')
-from geo_functions import cross, is_on_line
+from ..geo_functions import cross, is_on_line
 class Line(list):
     """
     defines a line 

@@ -28,6 +28,10 @@ class Point(list):
         """Add a vector to this point, returning a new point."""
         return Point([self[i] + vec[i] for i in range(3)])
     
+    def to_array(self):
+        """Convert the point to a numpy array."""
+        return np.array(self)
+    
     def __neg__(self):
         """Return the negation of this point."""
         return Point([-self[i] for i in range(len(self))])

@@ -1,7 +1,7 @@
 import math
 import numpy as np
-from Vector import Vector
-from rincewind.geo_functions import dot, cross
+from .Vector import Vector
+from ..geo_functions import dot, cross
 
 class Quaternion(list):
 
@@ -139,9 +139,9 @@ def matrix_to_quaternion(mat):
 
 if __name__=='__main__':
     q=Quaternion((0.5,-0.5,-0.5,0.5) )
-    print q
-    print '-------------------------------'
+    print(q)
+    print('-------------------------------')
     m = q.to_matrix()
-    print m
-    print '-------------------------------'
-    print matrix_to_quaternion(m)
+    print(m)
+    print('-------------------------------')
+    print(matrix_to_quaternion(m))

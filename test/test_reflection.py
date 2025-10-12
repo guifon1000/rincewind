@@ -52,6 +52,6 @@ vecplane.add_to_ax(ax, ptplane)
 tr1.add_to_ax(ax)
 #trirefl.add_to_ax(ax)
 
-print plane.reflection_mat
+print (plane.reflection_mat)
 
 plt.show()

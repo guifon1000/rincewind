@@ -121,7 +121,7 @@ def create_roof(data, thickness=0.5):
         parts.append(Part(dicoface))
     cont = True
     while cont:
-        print len(parts)
+        print (len(parts))
         for i,parti in enumerate(parts):
             found_intersection = False
             for j,partj in enumerate(parts):
@@ -141,7 +141,7 @@ def create_roof(data, thickness=0.5):
     else:
         for iroof,part in enumerate(parts):
             part.set_name('roof_'+str(iroof+1))
-            print 'case with several roofs not implemented yet'
+            print ('case with several roofs not implemented yet')
             sys.exit()
     return parts 
     
@@ -154,7 +154,7 @@ def find_2d_point(data, name):
             return [float(p[1]), float(p[2])]
             break
     else:
-        print 'point '+name+' not found, aborting'
+        print ('point '+name+' not found, aborting')
         sys.exit()
 
 
@@ -178,7 +178,7 @@ def through_wall_frame_array(data, hole):
                     for w in data[k][k2]:
                         if w[0]==hole[0] and w[1]>=thickness:
                             thickness = w[1]
-                            print " wall "+w[0]+" found with thickness "+str(thickness)
+                            print (" wall "+w[0]+" found with thickness "+str(thickness))
                             pts = w[0].split('-')
                             start = find_2d_point(data,pts[0]) 
                             end = find_2d_point(data,pts[1])
@@ -201,7 +201,7 @@ def through_wall_frame_array(data, hole):
                             pol2d.append(pol2d[0])
                             hole_slice = NamedPolyline(pol2d, key = 'hole')
                             slices = populate_slices(frame_array, [hole_slice])
-	                    hole_extrusion = Extrusion('hole',slices,frame_array)
+	#hole_extrusion = Extrusion('hole',slices,frame_array) ?????? 
 
     return hole_extrusion
                             
@@ -219,16 +219,16 @@ def populate_slices(frame_array, all_polylines):
     for iframe, frame in enumerate(frame_array):
         parameter = float(iframe)/(float(len(frame_array)-1))
         polylines_on_frame = []
-        print '______________________________________'
+        print ('______________________________________')
         for a_slice in all_polylines:
-            print a_slice
+            print (a_slice)
             #if 'lv0' in a_slice.ordered_keys[0]:
             sl = a_slice.to_frame(frame)
             polylines_on_frame.append(sl)
             #if 'lv1' in a_slice.ordered_keys[0]:
             #    sl = a_slice.to_frame(frame, scale = None)
             #    polylines_on_frame.append(sl)
-        print len(polylines_on_frame)
+        print (len(polylines_on_frame))
         slices.append(polylines_on_frame)
     return slices
     
@@ -265,10 +265,10 @@ from OCC.Display.SimpleGui import init_display
 #start_display()
 
 #sys.exit()
-print "#############################################"
-print "               HOUSE MODELER                 "
-print "#############################################"
-print project_name
+print ("#############################################")
+print ("               HOUSE MODELER                 ")
+print ("#############################################")
+print (project_name)
 stages = []
 for k in data:
     if 'stage_' in k:
@@ -294,7 +294,7 @@ for stage in stages:
             wall_name = wall[0]
             wall_thickness = wall[1]
             pts = [find_2d_point(data, wall_name.split('-')[i]) for i in range(2)]
-            print 'the external wall '+ wall_name +' is between '+str(pts)+' and has thickness '+ str(wall_thickness)
+            print ('the external wall '+ wall_name +' is between '+str(pts)+' and has thickness '+ str(wall_thickness))
             wall_idx = []
             for p in pts:
                 pt3d = Point([p[0], p[1], 0.])
@@ -334,7 +334,7 @@ for stage in stages:
             height = float(data[stage]['height'])
         elif data[stage]['height']=='roof':
             height = 100.
-	wall_frames =vertical_frame_array(floor_level, height)
+""" 	wall_frames =vertical_frame_array(floor_level, height)
         i_level = 0
         for full_wall in wall_levels:
             add_to_fig(full_wall, ax2)
@@ -361,7 +361,7 @@ for stage in stages:
                         part_to_stl(project_name, roof_part, dl=1.)
                         parts_dict['roof'] = roof_part
             if data[stage].has_key('cap_start'):
-                print('not implemented yet')
+                print('not implemented yet') """
 
             #sys.exit()
                 
@@ -369,10 +369,10 @@ for stage in stages:
             #sys.exit()
             #cad_walls_filled = fill(walls_extrusion, patch_mode='polylines', polyline_mode='raw', with_holes=False)
             #part_to_stl(project_name+'_'+str(i_level)+'_filled', cad_walls_filled)
-            part_to_stl(project_name, cad_walls, dl=1.)
-            parts_dict[data[stage]['name']] = cad_walls
+            #part_to_stl(project_name, cad_walls, dl=1.) ???
+            # parts_dict[data[stage]['name']] = cad_walls
             #part_array.append(cad_walls)
-            i_level+=1
+            #i_level+=1
         #floor_level+=data[stage]['height']
 
 merge_parts = []
@@ -384,7 +384,7 @@ ax2.autoscale_view()
 plt.show()
 cont = True
 while cont:
-    print len(merge_parts)
+    print (len(merge_parts))
     for i,parti in enumerate(merge_parts):
         found_intersection = False
         for j,partj in enumerate(merge_parts):
@@ -400,9 +400,9 @@ while cont:
     else:break
 
 
-print len(merge_parts)
+print (len(merge_parts))
 pt = merge_parts[0]
 pt.set_name('merge')
 part_to_stl(project_name,pt, dl=1.)
-print part_array
+print (part_array)
 write_solids('sew',part_array)

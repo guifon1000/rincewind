@@ -1,11 +1,10 @@
 import sys
 import numpy as np
-from geometry.Vector import Vector
-from geometry.Point import Point
-from geometry.Plane import Plane
-from geometry.Line import Line
-sys.path.append('../')
-from geo_functions import cross, intersect_3_planes, closest_point_on_line, distance, closest_point_on_line
+from .Vector import Vector
+from .Point import Point
+from .Plane import Plane
+from .Line import Line
+from ..geo_functions import cross, intersect_3_planes, closest_point_on_line, distance
 
 lcar = 0.1
 

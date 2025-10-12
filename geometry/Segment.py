@@ -1,7 +1,7 @@
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Line import Line
-from geo_functions import cross, intersect_2_lines, intersect_2_segments, distance
+from .Point import Point
+from .Vector import Vector
+from .Line import Line
+from ..geo_functions import cross, intersect_2_lines, intersect_2_segments, distance
 class Segment(list):
     """
     defines a segment 

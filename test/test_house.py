@@ -16,7 +16,7 @@ s = json.dumps(data)
 s = re.sub(r'\{','{\n', s)
 s = re.sub(r',\s+\"',',\n\"', s)
 s = re.sub(r'\}','\n}', s)
-print s
+print (s)
 sys.exit()
 #data = json.load(open('./assets/4_walls.json', 'r'))
 all_tree_nodes = create_treenodes(data['points'],data['walls'], default_thickness = 0.2)
@@ -71,19 +71,19 @@ for iframe, frame in enumerate(frame_array):
             polylines_on_frame.append(sl)
     slices.append(polylines_on_frame)
 
-print '----------------------'
-print len(set([len(sl) for sl in slices]))
+print ('-----------------')
+print (len(set([len(sl) for sl in slices])))
 named_3d_slices = []
 for i,sl in enumerate(slices):
-    print '$$$$$$$$ FRAME : '+ str(i)+ ' $$$$$$$$$$'
+    print ('$$$$$$$$$ FRAME : '+ str(i)+ ' $$$$$$$$$$')
     polylines_in_slice = []
     for s in sl:
         polylines_in_slice.append(s.express_in_frame_plane(frames[i]))
     if classify_polylines(polylines_in_slice)== reference_classification:
         named_3d_slices.append(sl)
 
-print len(named_3d_slices)
-print len(frames)
+print (len(named_3d_slices))
+print (len(frames))
 #sys.exit()
 """
 for sl in slices:

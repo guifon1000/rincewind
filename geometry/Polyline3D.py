@@ -1,11 +1,11 @@
 import numpy as np
-from geometry.Plane import Plane
-from geometry.Triangle import Triangle
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Segment import Segment
-from geometry.Triangulation import Triangulation
-from geo_functions import is_on_plane, distance, angle, cross, is_in_polyline
+from .Plane import Plane
+from .Triangle import Triangle
+from .Point import Point
+from .Vector import Vector
+from .Segment import Segment
+from .Triangulation import Triangulation
+from ..geo_functions import is_on_plane, distance, angle, cross, is_in_polyline
 import random
 
 class Polyline3D(list):    #always closed

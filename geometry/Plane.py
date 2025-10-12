@@ -1,9 +1,9 @@
-from geometry.Point import Point
+from .Point import Point
 import sys
 import numpy as np
-from geo_functions import cross, is_on_plane
-from geometry.Vector import Vector
-from geometry.Frame import Frame
+from ..geo_functions import cross, is_on_plane
+from .Vector import Vector
+from .Frame import Frame
 class Plane(list):
     """
     defines a plane 

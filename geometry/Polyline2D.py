@@ -1,11 +1,11 @@
 import numpy as np
-from geometry.Point import Point
-from geometry.Frame import Frame
-from geometry.Segment import Segment
-from geometry.Vector import Vector
-from geometry.Polyline3D import Polyline3D
-from geo_functions import dot, cross
-from analytic_functions.bezier_functions import piecewise_bezier_polyline, bezier_function
+from .Point import Point
+from .Frame import Frame
+from .Segment import Segment
+from .Vector import Vector
+from .Polyline3D import Polyline3D
+from ..geo_functions import dot, cross
+from ..analytic_functions.bezier_functions import piecewise_bezier_polyline, bezier_function
 import types
 
 class Polyline2D(list):    #always closed

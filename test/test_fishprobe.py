@@ -213,8 +213,8 @@ for fn in f.array:
         y.append(xy[1])
 plt.show()
 part = f.revolve('mark')
-print 'volume by occ'
-print part.volume
+print ('volume by occ')
+print (part.volume)
 
 
 tri = part.get_triangulation(project_name,dl=0.005)
@@ -235,10 +235,10 @@ for hole in internal_parts:
 foam_density = 500.
 
 points_and_masses.append([Point(part_with_holes.cog),part_with_holes.volume*foam_density])
-print barycenter(points_and_masses)
+print (barycenter(points_and_masses))
 #print part_with_holes.volume
 #print part_with_holes.cog
-print '#######################################'
+print ('#######################################')
 bary =  barycenter(points_and_masses)[0]
 mass =  barycenter(points_and_masses)[1]
 
@@ -255,23 +255,23 @@ for face in tri['faces']:
 
 msh = Mesh(tri['vertices'], faces_mesh, name='zob')
 hydro_cog = np.dot(msh.rotate_y(0.5*math.pi), bary)
-print '------- used mass -------'
-print 0.001*mass
-print 'volume by mm'
-print msh.volume
+print ('------- used mass -------')
+print (0.001*mass)
+print ('volume by mm')
+print (msh.volume)
 hydro = mh.Hydrostatics(msh,cog=hydro_cog, mass=0.001*mass)
-print hydro.gravity_center
+print (hydro.gravity_center)
 write_VTK("before_hydrostatics.vtk", hydro._vertices, hydro._faces)
 try:
     hydro.equilibrate()
 except:
-    print 'could not solve hydrostatics'
+    print ('could not solve hydrostatics')
 write_VTK("after_hydrostatics.vtk", hydro._vertices, hydro._faces)
-print 'final position of the gravity center : '+str(hydro.gravity_center)
-print 'the mesh is at equilibrium : '+str(hydro.is_at_equilibrium())
-print 'the mesh is stable : '+str(hydro.isstable())
-print 'transversal metacentric height '+str(hydro.transversal_metacentric_height)
-print 'longitudinal metacentric height '+str(hydro.longitudinal_metacentric_height)
+print ('final position of the gravity center : '+str(hydro.gravity_center))
+print ('the mesh is at equilibrium : '+str(hydro.is_at_equilibrium()))
+print ('the mesh is stable : '+str(hydro.isstable()))
+print ('transversal metacentric height '+str(hydro.transversal_metacentric_height))
+print ('longitudinal metacentric height '+str(hydro.longitudinal_metacentric_height))
 
 
 from dactylos.primitives import box

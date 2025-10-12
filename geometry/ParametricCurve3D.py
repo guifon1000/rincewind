@@ -1,10 +1,10 @@
 from scipy import interpolate
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Polyline3D import Polyline3D
-from geometry.Plane import Plane
-from geometry.Frame import Frame
-from geo_functions import closest_point_on_plane, cross
+from .Point import Point
+from .Vector import Vector
+from .Polyline3D import Polyline3D
+from .Plane import Plane
+from .Frame import Frame
+from ..geo_functions import closest_point_on_plane, cross
 import numpy as np
 
 class ParametricCurve3D(object):

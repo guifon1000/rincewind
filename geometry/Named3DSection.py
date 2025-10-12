@@ -1,5 +1,5 @@
 import sys
-from geometry.Polyline3D import Polyline3D
+from .Polyline3D import Polyline3D
 
 class Named3DSection(dict):
     def __init__(self, polylines, ordered_keys):

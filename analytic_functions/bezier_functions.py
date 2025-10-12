@@ -168,8 +168,8 @@ def bezier_function(control_points):
 
 
 
-from geo_functions import cross, angle
-from geometry.Vector import Vector
+from ..geo_functions import cross, angle
+from ..geometry.Vector import Vector
 class BezierSegment(object):
     # on ly in 2D for now
     def __init__(self, pt1, pt2, n_segments):

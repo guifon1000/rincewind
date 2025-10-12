@@ -20,7 +20,7 @@ ax = fig.add_subplot(111, projection='3d')
 #ax.set_ylim(-10.,10.)
 #ax.set_zlim(-10.,10.)
 romarine = json.load(open('house.json','r'))
-print romarine
+print (romarine)
 data = {}
 data['points'] = []
 for p in romarine['points']:
@@ -60,7 +60,7 @@ part_array = []
 for tn in all_tree_nodes:
     pol =  tn.offset(default_thickness = 0.2)
     named_pol = NamedPolyline(pol)
-    print named_pol
+    print (named_pol)
     frame_array = extrusion_generator.frame_array_with_rmf(floor_frame,1)
     extrusion_list = []
     for frame in frame_array:
@@ -69,7 +69,7 @@ for tn in all_tree_nodes:
             pol3d = named_pol[k].to_frame(frame)
 
             named_3d_section_list.append(pol3d)
-        print len(named_3d_section_list)
+        print (len(named_3d_section_list))
         named_3d_section = Named3DSection(named_3d_section_list, ['default'])
         extrusion_list.append(named_3d_section)
     #profile_array.append(
@@ -91,7 +91,7 @@ while cont == True:
                 part_array.remove(sj)
                 #part_array.append(fuse_parts(si,sj))
                 new_array.append(fuse_parts(si,sj))
-                print len(part_array)
+                print (len(part_array))
                 break
         if found_intersection:
             break
@@ -111,7 +111,7 @@ while cont == True:
                 part_array.remove(sj)
                 #part_array.append(fuse_parts(si,sj))
                 new_array.append(fuse_parts(si,sj))
-                print len(part_array)
+                print (len(part_array))
                 break
         if found_intersection:
             break
@@ -119,7 +119,7 @@ while cont == True:
     #if  found_intersection:
         cont = False
 part_array = new_array+ part_array
-print len(part_array)
+print (len(part_array))
 write_solids( "romarine", part_array, omit = [])
 from OCC.Display.SimpleGui import init_display
 display, start_display, add_menu, add_function_to_menu = init_display()

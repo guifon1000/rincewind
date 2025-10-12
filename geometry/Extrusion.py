@@ -1,8 +1,8 @@
-from geometry.Vector import Vector
-from geometry.Polyline2D import Polyline2D, NamedPolyline, NamedCircle
-from geometry.Polyline3D import Polyline3D
-from geometry.Frame import Frame
-from geo_functions import cross
+from .Vector import Vector
+from .Polyline2D import Polyline2D, NamedPolyline, NamedCircle
+from .Polyline3D import Polyline3D
+from .Frame import Frame
+from ..geo_functions import cross
 
 class Extrusion(dict):
     """

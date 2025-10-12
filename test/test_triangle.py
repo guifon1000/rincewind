@@ -1,15 +1,15 @@
 import numpy as np
-from rincewind.geo_functions import (is_on_plane, intersect_2_segments, 
+from ..geo_functions import (is_on_plane, intersect_2_segments, 
         matrix_to_quaternion, intersect_2_lines, distance, is_on_segment, cut_triangle_by_plane)
-from rincewind.io_functions import pretty_print
-from rincewind.geometry.Point import Point
-from rincewind.geometry.Triangle import Triangle
-from rincewind.geometry.Line import Line
-from rincewind.geometry.Vector import Vector
-from rincewind.geometry.Plane import Plane
-from rincewind.geometry.Segment import Segment
-from rincewind.geometry.TreeNode import TreeNode
-from rincewind.geometry.Quaternion import Quaternion
+from ..io_functions import pretty_print
+from ..geometry.Point import Point
+from ..geometry.Triangle import Triangle
+from ..geometry.Line import Line
+from ..geometry.Vector import Vector
+from ..geometry.Plane import Plane
+from ..geometry.Segment import Segment
+from ..geometry.TreeNode import TreeNode
+from ..geometry.Quaternion import Quaternion
 import sys
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -35,29 +35,29 @@ t = Triangle(points)
 
 pl = Plane(points)
 pl_zero = Plane([Point([0,0,0]), Vector([0,0,1])])
-print ' ----- A TRIANGLE ------ '
-print t
-print 'attributes'
-print 'cog = '+str(t.cg)
-print 'normal = '+str(t.normal)
+print (' ----- A TRIANGLE ------ ')
+print (t)
+print ('attributes')
+print ('cog = '+str(t.cg))
+print ('normal = '+str(t.normal))
 
-print ' REVERSE ---------> '
+print (' REVERSE ---------> ')
 t = -t
-print t
-print 'attributes'
-print 'cog = '+str(t.cg)
-print 'circumcenter = '+str(t.circumcenter)
-print 'normal = '+str(t.normal)
+print (t)
+print ('attributes')
+print ('cog = '+str(t.cg))
+print ('circumcenter = '+str(t.circumcenter))
+print ('normal = '+str(t.normal))
 
-print is_on_plane(t.circumcenter, pl)
-print is_on_plane(t.cg, pl)
-print is_on_plane(Point((0.,0.,0.)), pl)
+print (is_on_plane(t.circumcenter, pl))
+print (is_on_plane(t.cg, pl))
+print (is_on_plane(Point((0.,0.,0.)), pl))
 
 classif = []
-print '-------------------------'
+print ('-------------------------')
 pols = cut_triangle_by_plane(t,pl_zero)
-for pol in pols: print pol
-print '------------------'
+for pol in pols: print (pol)
+print ('------------------')
 
 for group in pols:
     for pol in group:
@@ -77,11 +77,11 @@ l1 = Line((p1,v1))
 p2 = points[2]
 v2 = Vector([points[1][i] - points[2][i] for i in range(3)])
 l2 = Line((p2,v2))
-print '======='
-print intersect_2_lines(l1, l2)
-print '--------------'
-print points[1]
-print '======='
+print ('=======')
+print (intersect_2_lines(l1, l2))
+print ('--------------')
+print (points[1])
+print ('=======')
 
 
 idtest += 1
@@ -92,7 +92,7 @@ p3 = Point([0.,1.,0.])
 p4 = Point([1.,0.,0.])
 seg1 = Segment([p2, p1])
 seg2 = Segment([p3, p4])
-print intersect_2_segments(seg1, seg2)
+print (intersect_2_segments(seg1, seg2))
 
 idtest += 1
 pretty_print('TEST n.' + str(idtest) + ': POLAR PARTITION OFFSET')
@@ -143,32 +143,32 @@ idtest += 1
 pretty_print('TEST n.' + str(idtest) + ': QUATERNION')
 
 q1 = Quaternion((1., 0.5, 0.6, 0.9))
-print 'Q1 : '
-print q1
-print 'Q1 CONJUGATE : '
-print q1.conjugate
-print 'Q1 NORM : '
-print abs(q1)
-print 'Q1 INVERSE : '
-print q1.inverse()
-print 'Q1 * Q1^(-1)'
-print q1 * q1.inverse()
-print 'Q1 -> matrix'
-print q1.to_matrix()
+print ('Q1 : ')
+print (q1)
+print ('Q1 CONJUGATE : ')
+print (q1.conjugate)
+print ('Q1 NORM : ')
+print (abs(q1))
+print ('Q1 INVERSE : ')
+print (q1.inverse())
+print ('Q1 * Q1^(-1)')
+print (q1 * q1.inverse())
+print ('Q1 -> matrix')
+print (q1.to_matrix())
 
 mat = np.zeros((3,3))
 mat = np.array([ [0., 1., 0. ] , [-1, 0., 0.] , [0., 0., 1.] ])
 
-print '=========================='
-print 'MATRIX :'
-print mat
-print '=========================='
-print 'MATRIX -> QUATERNION :'
+print( '==========================')
+print ('MATRIX :')
+print (mat)
+print ('==========================')
+print ('MATRIX -> QUATERNION :')
 q =  matrix_to_quaternion(mat)
-print q 
-print '=========================='
-print 'QUATERNION -> MATRIX :'
-print q.to_matrix()
+print (q)
+print ('==========================')
+print ('QUATERNION -> MATRIX :')
+print (q.to_matrix())
 
 q2 = Quaternion((4., 0.25, 0.26, 0.49))
-print q1 * q2
+print (q1 * q2)

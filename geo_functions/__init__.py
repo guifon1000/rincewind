@@ -1,7 +1,7 @@
-from geometry.Point import Point
-from geometry.Vector import Vector
-from geometry.Frame import Frame
-#from geometry.Plane import Plane
+from ..geometry.Point import Point
+from ..geometry.Vector import Vector
+from ..geometry.Frame import Frame
+#from ..geometry.Plane import Plane
 
 from scipy import interpolate
 import numpy as np
@@ -71,8 +71,8 @@ def get_parameter(pt, line):
         return None
 
 def intersect_2_planes(pl1, pl2):
-    from geometry.Plane import Plane
-    from geometry.Line import Line
+    from ..geometry.Plane import Plane
+    from ..geometry.Line import Line
     n1 = pl1.normal_vector
     n2 = pl2.normal_vector
     line_dir = cross(n1,n2).unit()
@@ -84,7 +84,7 @@ def intersect_2_planes(pl1, pl2):
     return Line([ptl, line_dir])
 
 def intersect_2_lines(l1, l2):
-    from geometry.Plane import Plane
+    from ..geometry.Plane import Plane
     v1 = l1[1]
     v2 = l2[1]
     normal_vect = cross(l1[1], l2[1])
@@ -117,7 +117,7 @@ def intersect_2_lines(l1, l2):
 
 
 def intersect_2_segments(seg1, seg2):
-    from geometry.Line import Line
+    from ..geometry.Line import Line
     v1 = Vector([seg1[1][i] - seg1[0][i] for i in range(3)]).unit()
     v2 = Vector([seg2[1][i] - seg2[0][i] for i in range(3)]).unit()
     l1 = Line([seg1[0], v1])
@@ -163,7 +163,7 @@ def intersect_line_and_plane(line, plane):
         return None
 
 def closest_point_on_plane(pt, plane):
-    from geometry.Line import Line
+    from ..geometry.Line import Line
     if is_on_plane(pt, plane):
         return pt
     else:
@@ -172,7 +172,7 @@ def closest_point_on_plane(pt, plane):
 
 def closest_point_on_line(pt, line):
     #i.e. orthogonal projection of pt on line
-    from geometry.Line import Line
+    from ..geometry.Line import Line
     v1 = Vector([pt[i] - line[0][i] for i in range(3)])
     t = dot(v1, line[1])/line[1].norm**2.
     return line.parameter_point(t)
@@ -197,7 +197,7 @@ def circle_from_3_points(pt1, pt2, pt3):
 
 
 def create_treenodes(points, walls, default_thickness=None):
-    from geometry.TreeNode import TreeNode   
+    from ..geometry.TreeNode import TreeNode   
     all_tree_nodes = []
 
     if [len(wall)>=2 for wall in walls]!=[True for wall in walls] and (not default_thickness):
@@ -280,7 +280,7 @@ def sew_polyline_array(polylines):
 
 def is_in_polyline(pt, pol):
     # the point and the polyline must be 2d
-    from geometry.Segment import Segment
+    from ..geometry.Segment import Segment
     big = 1.e6
     far_point = Point([big, 3.45485646*big,0.])
     number_of_intersections = 0
@@ -295,7 +295,7 @@ def is_in_polyline(pt, pol):
     return number_of_intersections%2 == 1
 
 def is_polyline_in_polyline(pol1, pol2):
-    from geometry.Polyline2D import NamedPolyline, Polyline2D
+    from ..geometry.Polyline2D import NamedPolyline, Polyline2D
 
     if type(pol1)==Polyline2D:
         tpol1=pol1
@@ -386,9 +386,9 @@ def is_triangle_intersected_by_plane(triangle, plane):
         return False
 
 def cut_triangle_by_plane(triangle, plane, tol=1.e-12):
-    from geometry.Line import Line
-    from geometry.Segment import Segment
-    from geometry.Polyline3D import Polyline3D
+    from ..geometry.Line import Line
+    from ..geometry.Segment import Segment
+    from ..geometry.Polyline3D import Polyline3D
     if not is_triangle_intersected_by_plane(triangle, plane):
         return None
     else:
@@ -478,7 +478,7 @@ def triangulate_2_polylines(pol1, pol2):
             second = []
 
 def bissector_plane(p0,p1):
-    from geometry.Plane import Plane
+    from ..geometry.Plane import Plane
     mid = Point([0.5 * (p0[i] + p1[i]) for i in range(3)])
     vec = Vector([p1[i] - p0[i] for i in range(3)]).unit()
     return Plane([mid, vec])
@@ -494,7 +494,7 @@ def rotation_minimized_frame(frame0, point1, tangvec1):
 
 
 def matrix_to_quaternion(m):
-    from geometry.Quaternion import Quaternion
+    from ..geometry.Quaternion import Quaternion
     diag=np.diag(m)
     np.append(diag,1.)
 
@@ -580,7 +580,7 @@ def correct_points_and_walls(data):
     #                      *
     #                   WALL 2
     #                      *
-    #                      *                      
+    #                      *
 
     #                      |
     #                     _|_
@@ -594,10 +594,9 @@ def correct_points_and_walls(data):
     #                      *
     #                   WALL 2
     #                      *
-    #                      * 
-    from geometry.Segment import Segment
-    from geometry.Point import Point
-    from geo_functions import is_on_segment
+    #                      *
+    from ..geometry.Segment import Segment
+    from ..geometry.Point import Point
     segments = []
     for wall in data['walls']:
         seg = Segment([Point(data['points'][wall[0]]) , Point(data['points'][wall[1]])])
@@ -628,7 +627,7 @@ def correct_points_and_walls(data):
         walls.append([data['points'].index(s[0]), data['points'].index(s[1])])
     return {'points':data['points'], 'walls':walls}
 def unify_2_segments(seg1, seg2, keep_seg2 = False):
-    from geometry.Segment import Segment
+    from ..geometry.Segment import Segment
     #print(seg1)
     #print(seg2)
     #print('----')
@@ -670,9 +669,9 @@ def unify_2_segments(seg1, seg2, keep_seg2 = False):
 
 
 def sew_2_polylines(pol1, pol2):
-    from geometry.Polyline3D import Polyline3D
-    from geometry.Polyline2D import Polyline2D
-    from geometry.Frame import Frame
+    from ..geometry.Polyline3D import Polyline3D
+    from ..geometry.Polyline2D import Polyline2D
+    from ..geometry.Frame import Frame
     frame = Frame([[0.,0.,0.], [0, 0., 1.], [1., 0., 0.], [0., 1., 0.]])
     seg1 = [s for s in pol1.segments]
     seg2 = [s for s in pol2.segments]
