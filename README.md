@@ -51,7 +51,7 @@ Check the `test/` directory for usage examples:
 Clone the repository and include it in your Python path:
 
 ```bash
-git clone https://github.com/yourusername/rincewind.git
+git clone https://github.com/guifon1000/rincewind.git
 cd rincewind
 # Add to your PYTHONPATH or install in development mode:
 pip install -e .
@@ -76,7 +76,7 @@ hull.to_stl("wigley_hull.stl")
 
 ## License
 
-[Your license here]
+You can do what you want with this tool.
 
 ## Contributing
 
