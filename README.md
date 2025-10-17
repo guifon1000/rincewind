@@ -11,7 +11,7 @@ Rincewind provides a comprehensive toolkit for creating, manipulating, and analy
 - Parametric curve and surface creation
 - Triangulation and mesh generation
 - Extrusion-based modeling
-
+- Carpentry 
 ## Features
 
 - **Core Geometric Primitives**: Points, vectors, lines, planes, frames
