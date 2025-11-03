@@ -24,11 +24,11 @@ class Polyline3D(list):    #always closed
         #print(self.spline[1])
         #print(np.transpose(self))
  
-    def add_to_ax(self, ax):
+    def add_to_ax(self, ax, color='r'):
         x = [p[0] for p in self]
         y = [p[1] for p in self]
         z = [p[2] for p in self]
-        ax.plot(x,y,z,c='r') 
+        ax.plot(x,y,z,c=color)
 
     def pop_to_geom(self, geom):
         pts = []

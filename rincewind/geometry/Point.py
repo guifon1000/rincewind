@@ -28,6 +28,8 @@ class Point(list):
         """Add a vector to this point, returning a new point."""
         return Point([self[i] + vec[i] for i in range(3)])
     
+
+    
     def to_array(self):
         """Convert the point to a numpy array."""
         return np.array(self)
@@ -45,7 +47,7 @@ class Point(list):
                   If subtracting a vector, returns a new point.
         """
         other = other.__neg__()
-        return self + (-other)
+        return self + (other)
 
     def express_in_frame_plane(self, frame):
         """

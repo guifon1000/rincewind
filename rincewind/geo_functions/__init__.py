@@ -152,12 +152,33 @@ def intersect_2_segments(seg1, seg2):
     """
     return out
 
+
+
 def intersect_line_and_plane(line, plane):
+    ptline = line[0]  # Point on the line
+    vecline = line[1]  # Direction vector of the line
+    normplane = plane[:3]  # Normal vector of the plane (a, b, c)
+    d = plane[3]  # d in ax + by + cz + d = 0
+
+    # Check if line and plane are parallel
+    denominator = np.dot(vecline, normplane)
+    if np.abs(denominator) < 1.e-18:
+        return None  # Parallel or line lies on the plane
+
+    # Calculate t for the intersection point
+    numerator = -(np.dot(normplane, ptline) + d)
+    t = numerator / denominator
+
+    # Return the intersection point
+    return [ptline[i] + t * vecline[i] for i in range(3)]
+
+
+def intersect_line_and_plane000(line, plane):
     ptline = line[0]
     vecline = line[1]
     normplane = plane.normal_vector
     if np.abs(dot(vecline, normplane)) > 1.e-18:
-        t = - (plane[0]*ptline[0] + plane[1]*ptline[1] + plane[2]*ptline[2] + plane[3]) / dot(vecline, normplane) #warning : randomly added the +plane[3]
+        t =  -(plane[0]*ptline[0] + plane[1]*ptline[1] + plane[2]*ptline[2] + plane[3]) / dot(vecline, normplane) #warning : randomly added the +plane[3]
         return line.parameter_point(t)
     else:
         return None
@@ -361,7 +382,6 @@ def is_on_line(pt, line):
     #if not s:
     #    print(line[1]
     #    1/0
-    print(str(distance(pt_test, pt))+' <1e-6 ???')
     return distance(pt_test, pt)<1.e-6
 
 def is_on_plane(pt, plane, tol=1.e-12):

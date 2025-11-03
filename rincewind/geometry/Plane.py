@@ -69,3 +69,61 @@ class Plane(list):
                       self.reflect_vector(frame[1]).unit(), 
                       self.reflect_vector(frame[2]).unit(), 
                       self.reflect_vector(frame[3]).unit()])
+
+
+    def add_to_ax(self, ax, size=1.0, color='blue', alpha=0.2):
+        """
+        Visualize this plane on a matplotlib 3D axis.
+        Args:
+            ax: Matplotlib 3D axis
+            size: Size of the plane visualization (default: 1.0)
+            color: Color for the plane (default: 'blue')
+            alpha: Transparency of the plane (default: 0.2)
+        """
+        # Get the normal vector of the plane
+        normal = self.normal_vector
+        
+        # Find two vectors in the plane that are perpendicular to each other and to the normal
+        if abs(normal[0]) > abs(normal[1]):
+            v1 = Vector([normal[2], 0, -normal[0]])
+        else:
+            v1 = Vector([0, -normal[2], normal[1]])
+        v1 = v1.unit()
+        v2 = cross(normal, v1).unit()
+        
+        # Find a point on the plane
+        if abs(self[0]) > 1e-6:
+            x = -self[3]/self[0]
+            y = 0
+            z = 0
+        elif abs(self[1]) > 1e-6:
+            x = 0
+            y = -self[3]/self[1]
+            z = 0
+        else:
+            x = 0
+            y = 0
+            z = -self[3]/self[2]
+        point_on_plane = Point([x, y, z])
+        
+        # Create a grid on the plane
+        u = np.linspace(-size, size, 2)
+        v = np.linspace(-size, size, 2)
+        U, V = np.meshgrid(u, v)
+        
+        # Convert to 3D coordinates
+        X = point_on_plane[0] + U * v1[0] + V * v2[0]
+        Y = point_on_plane[1] + U * v1[1] + V * v2[1]
+        Z = point_on_plane[2] + U * v1[2] + V * v2[2]
+        
+        # Plot the plane using plot_surface
+        ax.plot_surface(X, Y, Z, color=color, alpha=alpha, linewidth=0.2, antialiased=True)
+        
+        # Plot the normal vector from the center of the plane
+        normal_scaled = normal * size * 0.5
+        ax.quiver(
+            point_on_plane[0], point_on_plane[1], point_on_plane[2],
+            normal_scaled[0], normal_scaled[1], normal_scaled[2],
+            color=color,
+            arrow_length_ratio=0.3
+        )
