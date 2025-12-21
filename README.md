@@ -48,14 +48,44 @@ Check the `test/` directory for usage examples:
 
 ## Installation
 
-Clone the repository and include it in your Python path:
+### Quick Start
 
 ```bash
 git clone https://github.com/guifon1000/rincewind.git
 cd rincewind
-# Add to your PYTHONPATH or install in development mode:
 pip install -e .
 ```
+
+### Installation Modes
+
+**Development mode** (recommended for development):
+```bash
+# Install with dev dependencies (pytest, pytest-cov)
+pip install -e ".[dev]"
+```
+
+**Production mode** (minimal dependencies):
+```bash
+# Install only core dependencies (numpy, matplotlib)
+pip install .
+```
+
+### Verify Installation
+
+```bash
+# Check installation
+python -c "import rincewind; print(rincewind.__file__)"
+
+# Run tests
+pytest test/ -v
+```
+
+### Configuration
+
+The project uses modern Python standards:
+- **pyproject.toml**: Main configuration file (metadata, dependencies, build system)
+- **setup.py**: Minimal legacy compatibility (calls setuptools.setup())
+- **Requires Python 3.8+**
 
 ## Usage
 

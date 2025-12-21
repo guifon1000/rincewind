@@ -51,7 +51,9 @@ class Polyline3D(list):    #always closed
                     break
         return out
 
-    
+    def to_gdl(self):
+        #for p in self:
+        print('Polyline3D to GDL')
 
 
     def planar_polyline(self):

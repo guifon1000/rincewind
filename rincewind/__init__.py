@@ -1,0 +1,1 @@
+print(" Rincewind package initialized ")

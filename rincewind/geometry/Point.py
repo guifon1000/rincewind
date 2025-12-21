@@ -1,5 +1,4 @@
 import numpy as np
-
 # Default characteristic length for mesh generation
 lcar = 0.1
 
@@ -22,6 +21,7 @@ class Point(list):
             Point coordinates are accessed via indexing: point[0], point[1], point[2]
             representing x, y, and z coordinates respectively
         """
+        self.name = kwargs.get('name', None)
         super(Point, self).__init__(*largs)
 
     def __add__(self, vec):
@@ -48,6 +48,12 @@ class Point(list):
         """
         other = other.__neg__()
         return self + (other)
+    
+    def __repr__(self):
+        """String representation of the Point."""
+        return f"Point({self[0]}, {self[1]}, {self[2]})"
+    
+
 
     def express_in_frame_plane(self, frame):
         """

@@ -263,6 +263,19 @@ class Bar:
         all_intersections = [inter0, inter1, inter2, inter3]
         points = [p for p in all_intersections if p is not None]
         return points
+    
+    def get_face_vertices(self, face_index: int) -> List[Point]:
+        """
+        Get the corner vertices for a given face of the bar.
+        
+        Args:
+            face_index: Index of the face (0-5)
+        Returns:
+            List[Point]: List of corner points for the face
+        """
+        face_vertex_indices = self._generate_faces()[face_index]
+        return [Point(self.get_vertices()[i]) for i in face_vertex_indices]
+    
 
     def get_face_polyline(self, face_index: int) -> List[Point]:
         """
@@ -286,8 +299,8 @@ class Bar:
             plane: Plane to split the bar along its length
         """
         # pt1 distance to plane
-        if is_on_plane(self.pt1, plane) and is_on_plane(self.pt2, plane):
-            print('Bar already lies on the splitting plane. Fuck you')
+        #if is_on_plane(self.pt1, plane) and is_on_plane(self.pt2, plane):
+            #print('Bar already lies on the splitting plane.')
             
         
         line_start = Line((self.start_corners[2], self.start_corners[3]))
@@ -306,6 +319,15 @@ class Bar:
         vertices.extend([p for p in self.start_corners])
         vertices.extend([p for p in self.end_corners])
         return vertices
+    
+    def get_vertices_as_string(self) -> str:
+        s = ""
+        vertices = self.get_vertices()
+        for p in vertices:
+            s+= str(p[0])+" "+str(p[1])+" "+str(p[2])+" "
+        s+="\n"
+        return s
+
     
     def export_data(self) -> Dict:
         """
