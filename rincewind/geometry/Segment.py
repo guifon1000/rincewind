@@ -22,6 +22,10 @@ class Segment(list):
             return True
         else:
             return False
+    @property
+    def length(self):
+        return distance(self[0],self[1])
+
 
     def add_to_ax(self,ax):
         x = [p[0] for p in self]
